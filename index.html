@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云开见境 · 开云</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans SC', sans-serif;
+            background: #f1f7f6;
+            color: #1e2d2b;
+            line-height: 1.7;
+            padding: 24px 18px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrap {
+            max-width: 860px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 12px 30px rgba(20, 60, 55, 0.08);
+            padding: 40px 28px 48px;
+            margin: 16px 0;
+            transition: box-shadow 0.2s;
+        }
+
+        /* 蓝绿色点缀 —— 网格卡片背景 */
+        .hero {
+            margin-bottom: 36px;
+            background: linear-gradient(145deg, #e6f3f0 0%, #d3ebe6 100%);
+            border-radius: 24px;
+            padding: 32px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg, rgba(50, 130, 115, 0.07) 2px, transparent 2px),
+                linear-gradient(-45deg, rgba(50, 130, 115, 0.07) 2px, transparent 2px);
+            background-size: 28px 28px;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 450;
+            letter-spacing: 1px;
+            color: #1b4a44;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 8px;
+        }
+
+        .hero .sub {
+            font-size: 1.05rem;
+            color: #2d625b;
+            border-left: 4px solid #3f9b8c;
+            padding-left: 18px;
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
+            font-weight: 350;
+        }
+
+        /* 导语 */
+        .intro {
+            font-size: 1.1rem;
+            margin: 24px 0 28px;
+            padding: 16px 20px;
+            background: #f6fcfb;
+            border-radius: 20px;
+            border: 1px solid #d6eae6;
+            color: #1f423d;
+        }
+
+        /* 网格卡片容器 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        @media (max-width: 580px) {
+            .grid-cards {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .page-wrap {
+                padding: 24px 16px 32px;
+            }
+        }
+
+        .card {
+            background: #f5fbf9;
+            border-radius: 20px;
+            padding: 20px 18px 22px;
+            border: 1px solid #d4e7e2;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 2px 6px rgba(40, 110, 95, 0.04);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(30, 95, 80, 0.08);
+            border-color: #a2cdc2;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 440;
+            color: #1b5a51;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #2f514a;
+            margin-bottom: 6px;
+        }
+
+        .card .tag {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            background: #c2e0d9;
+            color: #17564b;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-weight: 400;
+        }
+
+        /* 正文段落 */
+        .body-text {
+            margin: 28px 0 20px;
+        }
+
+        .body-text p {
+            margin: 18px 0;
+            font-size: 1rem;
+            color: #1f3d39;
+        }
+
+        .body-text .highlight-quote {
+            background: #e7f5f1;
+            padding: 18px 24px;
+            border-radius: 20px;
+            border-left: 6px solid #3f9b8c;
+            margin: 28px 0;
+            font-style: normal;
+            font-size: 1.04rem;
+            color: #12433c;
+        }
+
+        .body-text .highlight-quote strong {
+            font-weight: 500;
+            color: #0b5245;
+        }
+
+        .ref-note {
+            background: #eef6f3;
+            padding: 16px 22px;
+            border-radius: 18px;
+            margin: 30px 0 18px;
+            font-size: 0.96rem;
+            border: 1px dashed #81b9ae;
+            color: #1e5148;
+        }
+
+        .ref-note a {
+            color: #1b7866;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #5daa9b;
+            transition: border 0.2s;
+        }
+
+        .ref-note a:hover {
+            border-bottom: 2px solid #2b8c7a;
+        }
+
+        /* 访问句 */
+        .visit-line {
+            margin: 40px 0 16px;
+            padding: 16px 20px;
+            background: #e5f3ef;
+            border-radius: 40px;
+            display: inline-block;
+            font-size: 1rem;
+            color: #13544a;
+            border: 1px solid #b7d9d0;
+        }
+
+        .visit-line a {
+            color: #147a67;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #6ab3a4;
+            transition: color 0.15s;
+        }
+
+        .visit-line a:hover {
+            color: #0a5c4d;
+            border-bottom-color: #0a5c4d;
+        }
+
+        /* FAQ 摘要 */
+        .faq-mini {
+            margin-top: 28px;
+            border-top: 1px solid #d2e7e1;
+            padding-top: 20px;
+        }
+
+        .faq-item {
+            display: flex;
+            flex-direction: column;
+            margin: 14px 0;
+        }
+
+        .faq-item .q {
+            font-weight: 480;
+            color: #1b5e54;
+            font-size: 1rem;
+        }
+
+        .faq-item .a {
+            margin-top: 4px;
+            color: #2c5b52;
+            font-size: 0.95rem;
+            padding-left: 12px;
+            border-left: 3px solid #a0cdc1;
+        }
+
+        .footer-meta {
+            margin-top: 36px;
+            font-size: 0.8rem;
+            color: #7a9d95;
+            text-align: center;
+            letter-spacing: 0.5px;
+            border-top: 1px solid #ddece7;
+            padding-top: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+    <div class="hero">
+        <h1>云开 · 见境</h1>
+        <div class="sub">从流动的信息中，辨认一片安静的风景</div>
+    </div>
+
+    <div class="intro">
+        如果说「开云」二字天然带着一种舒展与透亮的意象，那么围绕它所展开的内容，更像是在数字与现实的交界处，尝试建立一种温和、可靠的存在方式。
+    </div>
+
+    <!-- 网格卡片：从关键词背后展开 -->
+    <div class="grid-cards">
+        <div class="card">
+            <h3>云的开阔</h3>
+            <p>不只是技术层面的存储与访问，更关乎一种去中心化的轻松感——信息不必拥堵，空间不必封闭。</p>
+            <span class="tag">轻量 · 流动</span>
+        </div>
+        <div class="card">
+            <h3>境的沉淀</h3>
+            <p>在快节奏的交互背后，保留一处可供细读和回望的界面氛围。节奏放缓，反而更接近本质。</p>
+            <span class="tag">安静 · 质感</span>
+        </div>
+        <div class="card">
+            <h3>开合有度</h3>
+            <p>开放并非漫无边界，而是在透明与克制之间取得平衡。每一次连接都经过审慎的考量。</p>
+            <span class="tag">边界 · 信任</span>
+        </div>
+        <div class="card">
+            <h3>持续生长</h3>
+            <p>如同植物的向光性，好的平台会在使用中不断自我优化，不喧哗，但始终在场。</p>
+            <span class="tag">迭代 · 陪伴</span>
+        </div>
+    </div>
+
+    <!-- 多段正文 -->
+    <div class="body-text">
+        <p>在很多语境里，「云」总被赋予轻盈、遥不可及的特征。但当我们真正把目光投向那些构成「云」的细节——服务器、代码、协议、以及无数个日夜的维护——会发现轻盈的背后是精密与责任。而「开」字则暗示了一种可接近的姿态：不是封闭的堡垒，而是愿意打开窗口，让光与空气流入。</p>
+
+        <p>基于这样的理解，<a href="https://www.local-e-kaiyun.com.cn" style="color:#1b7866; text-decoration:none; border-bottom:1px dotted #5daa9b; font-weight:500;">开云</a>所呈现的面貌，并不是一个功能堆砌的入口，而更像一座经过整理的阅览室。在这里，信息的呈现有层次，交互的反馈有温度，每一个跳转都经过设计上的考量，而非盲目的引导。</p>
+
+        <div class="highlight-quote">
+            <strong>▎提示</strong> —— 好的数字空间，应该让人在离开时仍觉得平静，而不是被各种弹窗与横幅消耗掉注意力。开云在视觉与结构上尽可能剔除冗余，让内容自身成为主角。
+        </div>
+
+        <p>从用户的角度来说，真正值得信赖的网站往往不需要过多修饰。稳定的加载、清晰的导航、克制的用色，这些细节共同构成一种无声的承诺：我们重视你的时间和体验。也正是这种承诺，让「访问」变为一种「停留」。</p>
+    </div>
+
+    <!-- 引用提示 / 访问句 -->
+    <div class="ref-note">
+        📌 如果你正在寻找一个兼具可读性与功能性的线上空间，不妨从 <a href="https://www.local-e-kaiyun.com.cn">开云</a> 开始，感受那种不急于表达、却始终在场的氛围。
+    </div>
+
+    <div class="visit-line">
+        ⇢ 去感受 · <a href="https://www.local-e-kaiyun.com.cn">开云</a>
+    </div>
+
+    <!-- FAQ 摘要 (简洁) -->
+    <div class="faq-mini">
+        <div class="faq-item">
+            <span class="q">▸ 开云的核心特点是什么？</span>
+            <span class="a">注重信息沉淀与界面克制，在数字化表达中强调温和与清晰。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">▸ 适合哪些人使用？</span>
+            <span class="a">偏好安静浏览体验、希望避开过度营销氛围的用户，以及内容创作者与轻量团队。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">▸ 移动端体验如何？</span>
+            <span class="a">采用响应式网格与适量留白，在手机与平板上均可获得一致的阅读感。</span>
+        </div>
+    </div>
+
+    <div class="footer-meta">
+        —— 页面内容仅为风格展示，所涉链接指向真实站点 · 开云
+    </div>
+</div>
+</body>
+</html>

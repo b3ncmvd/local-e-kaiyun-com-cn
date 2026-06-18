@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://b3ncmvd.github.io/local-e-kaiyun-com-cn/sitemap.xml
